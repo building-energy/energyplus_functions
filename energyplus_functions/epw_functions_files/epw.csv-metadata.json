@@ -1,0 +1,384 @@
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {
+            "@language": "en"
+        }
+    ],
+    "@type": "Table",
+    "url": "",
+    "https://purl.org/berg/epw_vocab#location": {
+        "https://purl.org/berg/epw_vocab#city": "",
+        "https://purl.org/berg/epw_vocab#state_province_region": "",
+        "https://purl.org/berg/epw_vocab#country": "",
+        "https://purl.org/berg/epw_vocab#source": "",
+        "https://purl.org/berg/epw_vocab#WMO": "",
+        "https://purl.org/berg/epw_vocab#latitude": 0,
+        "https://purl.org/berg/epw_vocab#longitude": 0,
+        "https://purl.org/berg/epw_vocab#timezone": 0,
+        "https://purl.org/berg/epw_vocab#elevation": 0
+    },
+    "https://purl.org/berg/epw_vocab#design_conditions": {
+        "https://purl.org/berg/epw_vocab#number_of_design_conditions": 0,
+        "https://purl.org/berg/epw_vocab#design_condition_source": "",
+        "https://purl.org/berg/epw_vocab#design_condition_type": []
+    },
+    "https://purl.org/berg/epw_vocab#typical_or_extreme_periods": {
+        "https://purl.org/berg/epw_vocab#number_of_typical_or_extreme_periods": 0,
+        "https://purl.org/berg/epw_vocab#typical_or_extreme_periods_list": []
+    },
+    "https://purl.org/berg/epw_vocab#ground_temperatures": {
+        "https://purl.org/berg/epw_vocab#number_of_ground_temperatures": 0,
+        "https://purl.org/berg/epw_vocab#ground_temperatures_list": []
+    },
+    "https://purl.org/berg/epw_vocab#holiday_and_daylight_savings": {
+        "https://purl.org/berg/epw_vocab#leap_year_observed": "No",
+        "https://purl.org/berg/epw_vocab#daylight_saving_start_day": "",
+        "https://purl.org/berg/epw_vocab#daylight_saving_end_day": "",
+        "https://purl.org/berg/epw_vocab#number_of_holidays": 0,
+        "https://purl.org/berg/epw_vocab#holidays_list": []
+    },
+    "https://purl.org/berg/epw_vocab#comments_1": "",
+    "https://purl.org/berg/epw_vocab#comments_2": "",
+    "https://purl.org/berg/epw_vocab#data_periods": {
+        "https://purl.org/berg/epw_vocab#number_of_data_periods": 1,
+        "https://purl.org/berg/epw_vocab#number_of_records_per_hour": 1,
+        "https://purl.org/berg/epw_vocab#data_periods_list": [
+            {
+                "https://purl.org/berg/epw_vocab#data_period_name_and_description": "DataPeriod1",
+                "https://purl.org/berg/epw_vocab#data_period_start_date_of_week": "Sunday",
+                "https://purl.org/berg/epw_vocab#data_period_start_day": "1/1",
+                "https://purl.org/berg/epw_vocab#data_period_end_day": "12/31"
+            }
+        ]
+    },
+    "tableSchema": {
+        "columns": [
+            {
+                "titles": "year",
+                "datatype": {
+                    "base": "integer"
+                },
+                "rdfs:comment": "This is the Year of the data. Not really used in EnergyPlus. Used in the Weather Converter program for display in audit file."
+            },
+            {
+                "titles": "month",
+                "datatype": {
+                    "base": "integer",
+                    "minInclusive": 1,
+                    "maxInclusive": 12
+                },
+                "rdfs:comment": "This is the month (1-12) for the data. Cannot be missing."
+            },
+            {
+                "titles": "day",
+                "datatype": {
+                    "base": "integer",
+                    "minInclusive": 1,
+                    "maxInclusive": 31
+                },
+                "rdfs:comment": "This is the day (dependent on month) for the data. Cannot be missing."
+            },
+            {
+                "titles": "hour",
+                "datatype": {
+                    "base": "integer",
+                    "minInclusive": 1,
+                    "maxInclusive": 24
+                },
+                "rdfs:comment": "This is the hour of the data. (1 - 24). Hour 1 is 00:01 to 01:00. Cannot be missing."
+            },
+            {
+                "titles": "minute",
+                "datatype": {
+                    "base": "integer",
+                    "minInclusive": 0,
+                    "maxInclusive": 60
+                },
+                "rdfs:comment": "This is the minute field. (1..60)"
+            },
+            {
+                "titles": "data_source_and_uncertainty_flags",
+                "datatype": {
+                    "base": "string"
+                },
+                "rdfs:comment": "Initial day of weather file is checked by EnergyPlus for validity (as shown below). Each field is checked for `missing` as shown below. Reasonable values, calculated values or the last `good` value is substituted. The data source and uncertainty flags from various formats (usually shown with each field) are consolidated in the E/E+ EPW format. More is shown about Data Source and Uncertainty in Data Sources/Uncertainty section later in this document."
+            },
+            {
+                "titles": "dry_bulb_temperature",
+                "datatype": {
+                    "base": "double",
+                    "minExclusive": -70,
+                    "maxExclusive": 70,
+                    "null": 99.9,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                },
+                "rdfs:comment": "This is the dry bulb temperature in C at the time indicated. Note that this is a full numeric field (i.e. 23.6) and not an integer representation with tenths. Valid values range from -70C to 70C. Missing value for this field is 99.9."
+            },
+            {
+                "titles": "dew_point_temperature",
+                "datatype": {
+                    "base": "double",
+                    "minExclusive": -70,
+                    "maxExclusive": 70,
+                    "null": 99.9,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                },
+                "rdfs:comment": "This is the dew point temperature in C at the time indicated. Note that this is a full numeric field (i.e. 23.6) and not an integer representation with tenths. Valid values range from -70C to 70C. Missing value for this field is 99.9."
+            },
+            {
+                "titles": "relative_humidity",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "maxInclusive": 110,
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/PERCENT_RH"
+                },
+                "rdfs:comment": "This is the Relative Humidity in percent at the time indicated. Valid values range from 0% to 110%. Missing value for this field is 999."
+            },
+            {
+                "titles": "atmospheric_station_pressure",
+                "datatype": {
+                    "base": "double",
+                    "minExclusive": 31000,
+                    "maxExclusive": 120000,
+                    "null": 999999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/PA"
+                },
+                "rdfs:comment": "This is the station pressure in Pa at the time indicated. Valid values range from 31,000 to 120,000. (These values were chosen from the standard barometric pressure for all elevations of the World). Missing value for this field is 999999."
+            },
+            {
+                "titles": "extraterrestrial_horizontal_radiation",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-HR-PER-M2"
+                },
+                "rdfs:comment": "This is the Extraterrestrial Horizontal Radiation in Wh/m2. It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 9999."
+            },
+            {
+                "titles": "extraterrestrial_direct_normal_radiation",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-HR-PER-M2"
+                },
+                "rdfs:comment": "This is the Extraterrestrial Direct Normal Radiation in Wh/m2. (Amount of solar radiation in Wh/m2 received on a surface normal to the rays of the sun at the top of the atmosphere during the number of minutes preceding the time indicated). It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 9999."
+            },
+            {
+                "titles": "horizontal_infrared_radiation_intensity",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-HR-PER-M2"
+                },
+                "rdfs:comment": "This is the Horizontal Infrared Radiation Intensity in Wh/m2. If it is missing, it is calculated from the Opaque Sky Cover field as shown in the following explanation. It should have a minimum value of 0; missing value for this field is 9999. [More follows...]"
+            },
+            {
+                "titles": "global_horizontal_radiation",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-HR-PER-M2"
+                },
+                "rdfs:comment": "This is the Global Horizontal Radiation in Wh/m2. (Total amount of direct and diffuse solar radiation in Wh/m2 received on a horizontal surface during the number of minutes preceding the time indicated.) It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 9999."
+            },
+            {
+                "titles": "direct_normal_radiation",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-HR-PER-M2"
+                },
+                "rdfs:comment": "This is the Direct Normal Radiation in Wh/m2. (Amount of solar radiation in Wh/m2 received directly from the solar disk on a surface perpendicular to the sun's rays, during the number of minutes preceding the time indicated.) If the field is missing (≥ 9999 ) or invalid (< 0 ), it is set to 0. Counts of such missing values are totaled and presented at the end of the runperiod."
+            },
+            {
+                "titles": "diffuse_horizontal_radiation",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-HR-PER-M2"
+                },
+                "rdfs:comment": "This is the Diffuse Horizontal Radiation in Wh/m2. (Amount of solar radiation in Wh/m2 received from the sky (excluding the solar disk) on a horizontal surface during the number of minutes preceding the time indicated.) If the field is missing (≥ 9999 ) or invalid (< 0 ), it is set to 0. Counts of such missing values are totaled and presented at the end of the runperiod."
+            },
+            {
+                "titles": "global_horizontal_illuminance",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 999999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/LUX"
+                },
+                "rdfs:comment": " will be missing if > = 999900. This is the Global Horizontal Illuminance in lux. (Average total amount of direct and diffuse illuminance in hundreds of lux received on a horizontal surface during the number of minutes preceding the time indicated.) It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 999999 and will be considered missing if greater than or equal to 999900."
+            },
+            {
+                "titles": "direct_normal_illuminance",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 999999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/LUX"
+                },
+                "rdfs:comment": " will be missing if > = 999900. This is the Direct Normal Illuminance in lux. (Average amount of illuminance in hundreds of lux received directly from the solar disk on a surface perpendicular to the sun's rays, during the number of minutes preceding the time indicated.) It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 999999 and will be considered missing if greater than or equal to 999900."
+            },
+            {
+                "titles": "diffuse_horizontal_illuminance",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 999999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/LUX"
+                },
+                "rdfs:comment": " will be missing if > = 999900. This is the Diffuse Horizontal Illuminance in lux. (Average amount of illuminance in hundreds of lux received from the sky (excluding the solar disk) on a horizontal surface during the number of minutes preceding the time indicated.) It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 999999 and will be considered missing if greater than or equal to 999900."
+            },
+            {
+                "titles": "zentih_luminance",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/CD-PER-M2"
+                },
+                "rdfs:comment": "  will be missing if > = 9999. This is the Zenith Illuminance in Cd/m2. (Average amount of luminance at the sky's zenith in tens of Cd/m2 during the number of minutes preceding the time indicated.) It is not currently used in EnergyPlus calculations. It should have a minimum value of 0; missing value for this field is 9999."
+            },
+            {
+                "titles": "wind_direction",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "maxInclusive": 360,
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG"
+                },
+                "rdfs:comment": "This is the Wind Direction in degrees where the convention is that North = 0.0, East = 90.0, South = 180.0, West = 270.0. (Wind direction in degrees at the time indicated. If calm, direction equals zero.) Values can range from 0 to 360. Missing value is 999."
+            },
+            {
+                "titles": "wind_speed",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "maxInclusive": 40,
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/M-PER-SEC"
+                },
+                "rdfs:comment": "This is the wind speed in m/sec. (Wind speed at time indicated.) Values can range from 0 to 40. Missing value is 999."
+            },
+            {
+                "titles": "total_sky_cover",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "maxInclusive": 10,
+                    "null": 99,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/M-PER-SEC"
+                },
+                "rdfs:comment": "This is the value for total sky cover (tenths of coverage). (i.e. 1 is 1/10 covered. 10 is total coverage). (Amount of sky dome in tenths covered by clouds or obscuring phenomena at the hour indicated at the time indicated.) Minimum value is 0; maximum value is 10; missing value is 99."
+            },
+            {
+                "titles": "opaque_sky_cover",
+                "datatype": {
+                    "base": "double",
+                    "minInclusive": 0,
+                    "maxInclusive": 10,
+                    "null": 99,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/M-PER-SEC"
+                },
+                "rdfs:comment": "used if Horizontal IR Intensity missing. This is the value for opaque sky cover (tenths of coverage). (i.e. 1 is 1/10 covered. 10 is total coverage). (Amount of sky dome in tenths covered by clouds or obscuring phenomena that prevent observing the sky or higher cloud layers at the time indicated.) This is not used unless the field for Horizontal Infrared Radiation Intensity is missing and then it is used to calculate Horizontal Infrared Radiation Intensity. Minimum value is 0; maximum value is 10; missing value is 99."
+            },
+            {
+                "titles": "visibility",
+                "datatype": {
+                    "base": "double",
+                    "null": 9999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/KiloM"
+                },
+                "rdfs:comment": "This is the value for visibility in km. (Horizontal visibility at the time indicated.) It is not currently used in EnergyPlus calculations. Missing value is 9999."
+            },
+            {
+                "titles": "ceiling_height",
+                "datatype": {
+                    "base": "double",
+                    "null": 99999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/M"
+                },
+                "rdfs:comment": "This is the value for ceiling height in m. (77777 is unlimited ceiling height. 88888 is cirroform ceiling.) It is not currently used in EnergyPlus calculations. Missing value is 99999."
+            },
+            {
+                "titles": "present_weather_observation",
+                "rdfs:comment": "If the value of the field is 0, then the observed weather codes are taken from the following field. If the value of the field is 9, then `missing` weather is assumed. Since the primary use of these fields (Present Weather Observation and Present Weather Codes) is for rain/wet surfaces, a missing observation field or a missing weather code implies no rain. [more follows...]"
+            },
+            {
+                "titles": "present_weather_codes",
+                "rdfs:comment": "The present weather codes field is assumed to follow the TMY2 conventions for this field. Note that though this field may be represented as numeric (e.g. in the CSV format), it is really a text field of 9 single digits. This convention along with values for each `column` (left to right) is presented in Table 2.16. Note that some formats (e.g. TMY) does not follow this convention - as much as possible, the present weather codes are converted to this convention during WeatherConverter processing. Also note that the most important fields are those representing liquid precipitation - where the surfaces of the building would be wet. EnergyPlus uses `Snow Depth` to determine if snow is on the ground. [more follows...]"
+            },
+            {
+                "titles": "precipitable_water",
+                "datatype": {
+                    "base": "double",
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/MilliM"
+                },
+                "rdfs:comment": "This is the value for Precipitable Water in mm. (This is not rain - rain is inferred from the PresWeathObs field but a better result is from the Liquid Precipitation Depth field)). It is not currently used in EnergyPlus calculations (primarily due to the unreliability of the reporting of this value). Missing value is 999."
+            },
+            {
+                "titles": "aerosol_optical_depth",
+                "datatype": {
+                    "base": "double",
+                    "null": 0.999
+                },
+                "rdfs:comment": "units given as `thousandths`. This is the value for Aerosol Optical Depth in thousandths. It is not currently used in EnergyPlus calculations. Missing value is .999."
+            },
+            {
+                "titles": "snow_depth",
+                "datatype": {
+                    "base": "double",
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/CentiM"
+                },
+                "rdfs:comment": "This is the value for Snow Depth in cm. This field is used to tell when snow is on the ground and, thus, the ground reflectance may change. Missing value is 999."
+            },
+            {
+                "titles": "days_since_last_snowfall",
+                "datatype": {
+                    "base": "double",
+                    "null": 99,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DAY"
+                },
+                "rdfs:comment": "This is the value for Days Since Last Snowfall. It is not currently used in EnergyPlus calculations. Missing value is 99."
+            },
+            {
+                "titles": "albedo",
+                "datatype": {
+                    "base": "double",
+                    "null": 999
+                },
+                "rdfs:comment": "The ratio (unitless) of reflected solar irradiance to global horizontal irradiance. It is not currently used in EnergyPlus."
+            },
+            {
+                "titles": "liquid_precipitation_depth",
+                "datatype": {
+                    "base": "double",
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/MilliM"
+                },
+                "rdfs:comment": "The amount of liquid precipitation (mm) observed at the indicated time for the period indicated in the liquid precipitation quantity field. If this value is not missing, then it is used and overrides the rain indicator (IsRain) as true, when the hourly liquid precipitation is no less than 0.8 mm. Conversely, if the rain indicator shows rain and this field is missing or zero, it is set to 2.0 mm."
+            },
+            {
+                "titles": "liquid_precipitation_quantity",
+                "datatype": {
+                    "base": "double",
+                    "null": 999,
+                    "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/HR"
+                },
+                "rdfs:comment": "The period of accumulation (hr) for the liquid precipitation depth field. It is not currently used in EnergyPlus."
+            }
+        ]
+    }
+}

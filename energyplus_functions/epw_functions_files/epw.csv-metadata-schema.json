@@ -1,0 +1,341 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "https://raw.githubusercontent.com/stevenkfirth/csvw_metadata_json_schema/main/schema_files/table_description.schema.json"
+        },
+        {
+            "type": "object",
+            "required": [
+                "https://purl.org/berg/epw_vocab#location",
+                "https://purl.org/berg/epw_vocab#design_conditions",
+                "https://purl.org/berg/epw_vocab#typical_or_extreme_periods",
+                "https://purl.org/berg/epw_vocab#ground_temperatures",
+                "https://purl.org/berg/epw_vocab#holiday_and_daylight_savings",
+                "https://purl.org/berg/epw_vocab#comments_1",
+                "https://purl.org/berg/epw_vocab#comments_2",
+                "https://purl.org/berg/epw_vocab#data_periods"
+            ],
+            "properties": {
+                "https://purl.org/berg/epw_vocab#location": {
+                    "type": "object",
+                    "required": [
+                        "https://purl.org/berg/epw_vocab#city",
+                        "https://purl.org/berg/epw_vocab#state_province_region",
+                        "https://purl.org/berg/epw_vocab#country",
+                        "https://purl.org/berg/epw_vocab#source",
+                        "https://purl.org/berg/epw_vocab#WMO",
+                        "https://purl.org/berg/epw_vocab#latitude",
+                        "https://purl.org/berg/epw_vocab#longitude",
+                        "https://purl.org/berg/epw_vocab#timezone",
+                        "https://purl.org/berg/epw_vocab#elevation"
+                    ],
+                    "properties": {
+                        "https://purl.org/berg/epw_vocab#city": {
+                            "type": "string"
+                        },
+                        "https://purl.org/berg/epw_vocab#state_province_region": {
+                            "type": "string"
+                        },
+                        "https://purl.org/berg/epw_vocab#country": {
+                            "type": "string"
+                        },
+                        "https://purl.org/berg/epw_vocab#source": {
+                            "type": "string"
+                        },
+                        "https://purl.org/berg/epw_vocab#WMO": {
+                            "type": "string",
+                            "description": "usually a 6 digit field. Used as alpha in EnergyPlus"
+                        },
+                        "https://purl.org/berg/epw_vocab#latitude": {
+                            "type": "number",
+                            "description": "+ is North, - is South, degree minutes represented in decimal (i.e. 30 minutes is .5)",
+                            "minimum": -90,
+                            "maximum": 90,
+                            "default": 0,
+                            "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG"
+                        },
+                        "https://purl.org/berg/epw_vocab#longitude": {
+                            "type": "number",
+                            "description": "- is West, + is East, degree minutes represented in decimal (i.e. 30 minutes is .5)",
+                            "minimum": -180,
+                            "maximum": 180,
+                            "default": 0,
+                            "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG"
+                        },
+                        "https://purl.org/berg/epw_vocab#timezone": {
+                            "type": "number",
+                            "description": "Time relative to GMT.",
+                            "minimum": -12,
+                            "maximum": 12,
+                            "default": 0,
+                            "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/HR"
+                        },
+                        "https://purl.org/berg/epw_vocab#elevation": {
+                            "type": "number",
+                            "minimum": -1000,
+                            "maximumExclusive": 9999.9,
+                            "default": 0,
+                            "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/M"
+                        }
+                    }
+                },
+                "https://purl.org/berg/epw_vocab#design_conditions": {
+                    "type": "object",
+                    "required": [
+                        "https://purl.org/berg/epw_vocab#number_of_design_conditions",
+                        "https://purl.org/berg/epw_vocab#design_condition_source",
+                        "https://purl.org/berg/epw_vocab#design_condition_type"
+                    ],
+                    "properties": {
+                        "https://purl.org/berg/epw_vocab#number_of_design_conditions": {
+                            "type": "integer"
+                        },
+                        "https://purl.org/berg/epw_vocab#design_condition_source": {
+                            "type": "string",
+                            "description": "current sources are ASHRAE HOF 2009 US Design Conditions , Canadian Design Conditions and World Design Conditions"
+                        },
+                        "https://purl.org/berg/epw_vocab#design_condition_type": {
+                            "type": "array"
+                        }
+                    }
+                },
+                "https://purl.org/berg/epw_vocab#typical_or_extreme_periods": {
+                    "type": "object",
+                    "required": [
+                        "https://purl.org/berg/epw_vocab#number_of_typical_or_extreme_periods",
+                        "https://purl.org/berg/epw_vocab#typical_or_extreme_periods_list"
+                    ],
+                    "properties": {
+                        "https://purl.org/berg/epw_vocab#number_of_typical_or_extreme_periods": {
+                            "type": "integer"
+                        },
+                        "https://purl.org/berg/epw_vocab#typical_or_extreme_periods_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "https://purl.org/berg/epw_vocab#typical_or_extreme_period_name",
+                                    "https://purl.org/berg/epw_vocab#typical_or_extreme_period_type",
+                                    "https://purl.org/berg/epw_vocab#period_start_date",
+                                    "https://purl.org/berg/epw_vocab#period_end_date"
+                                ],
+                                "properties": {
+                                    "https://purl.org/berg/epw_vocab#typical_or_extreme_period_name": {
+                                        "type": "string"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#typical_or_extreme_period_type": {
+                                        "type": "string"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#period_start_date": {
+                                        "type": "string"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#period_end_date": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "https://purl.org/berg/epw_vocab#ground_temperatures": {
+                    "type": "object",
+                    "required": [
+                        "https://purl.org/berg/epw_vocab#number_of_ground_temperatures",
+                        "https://purl.org/berg/epw_vocab#ground_temperatures_list"
+                    ],
+                    "properties": {
+                        "https://purl.org/berg/epw_vocab#number_of_ground_temperatures": {
+                            "type": "integer"
+                        },
+                        "https://purl.org/berg/epw_vocab#ground_temperatures_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "https://purl.org/berg/epw_vocab#ground_temperature_depth",
+                                    "https://purl.org/berg/epw_vocab#soil_conductivity",
+                                    "https://purl.org/berg/epw_vocab#soil_density",
+                                    "https://purl.org/berg/epw_vocab#soil_specific_heat",
+                                    "https://purl.org/berg/epw_vocab#january_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#february_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#march_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#april_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#may_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#june_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#july_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#august_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#september_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#october_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#november_average_ground_temperature",
+                                    "https://purl.org/berg/epw_vocab#december_average_ground_temperature"
+                                ],
+                                "properties": {
+                                    "https://purl.org/berg/epw_vocab#ground_temperature_depth": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/M"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#soil_conductivity": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/W-PER-M-K"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#soil_density": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/KiloGM-PER-M3"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#soil_specific_heat": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/J-PER-KiloGM-K"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#january_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#february_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#march_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#april_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#may_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#june_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#july_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#august_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#september_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#october_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#november_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#december_average_ground_temperature": {
+                                        "type": "number",
+                                        "http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure": "http://qudt.org/vocab/unit/DEG_C"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "https://purl.org/berg/epw_vocab#holiday_and_daylight_savings": {
+                    "type": "object",
+                    "required": [
+                        "https://purl.org/berg/epw_vocab#leap_year_observed",
+                        "https://purl.org/berg/epw_vocab#daylight_saving_start_day",
+                        "https://purl.org/berg/epw_vocab#daylight_saving_end_day",
+                        "https://purl.org/berg/epw_vocab#number_of_holidays",
+                        "https://purl.org/berg/epw_vocab#holidays_list"
+                    ],
+                    "properties": {
+                        "https://purl.org/berg/epw_vocab#leap_year_observed": {
+                            "type": "string",
+                            "format": "Yes|No",
+                            "description": "Yes if Leap Year will be observed for this file. No if Leap Year days (29 Feb) should be ignored in this file."
+                        },
+                        "https://purl.org/berg/epw_vocab#daylight_saving_start_day": {
+                            "type": "string"
+                        },
+                        "https://purl.org/berg/epw_vocab#daylight_saving_end_day": {
+                            "type": "string"
+                        },
+                        "https://purl.org/berg/epw_vocab#number_of_holidays": {
+                            "type": "integer"
+                        },
+                        "https://purl.org/berg/epw_vocab#holidays_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "https://purl.org/berg/epw_vocab#holiday_name",
+                                    "https://purl.org/berg/epw_vocab#hoilday_date"
+                                ],
+                                "properties": {
+                                    "https://purl.org/berg/epw_vocab#holiday_name": {
+                                        "type": "string"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#hoilday_date": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "https://purl.org/berg/epw_vocab#comments_1": {
+                    "type": "string"
+                },
+                "https://purl.org/berg/epw_vocab#comments_2": {
+                    "type": "string"
+                },
+                "https://purl.org/berg/epw_vocab#data_periods": {
+                    "type": "object",
+                    "required": [
+                        "https://purl.org/berg/epw_vocab#number_of_data_periods",
+                        "https://purl.org/berg/epw_vocab#number_of_records_per_hour",
+                        "https://purl.org/berg/epw_vocab#data_periods_list"
+                    ],
+                    "properties": {
+                        "https://purl.org/berg/epw_vocab#number_of_data_periods": {
+                            "type": "integer"
+                        },
+                        "https://purl.org/berg/epw_vocab#number_of_records_per_hour": {
+                            "type": "integer"
+                        },
+                        "https://purl.org/berg/epw_vocab#data_periods_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "https://purl.org/berg/epw_vocab#data_period_name_and_description",
+                                    "https://purl.org/berg/epw_vocab#data_period_start_date_of_week",
+                                    "https://purl.org/berg/epw_vocab#data_period_start_day",
+                                    "https://purl.org/berg/epw_vocab#data_period_end_day"
+                                ],
+                                "properties": {
+                                    "https://purl.org/berg/epw_vocab#data_period_name_and_description": {
+                                        "type": "string"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#data_period_start_date_of_week": {
+                                        "type": "string",
+                                        "format": "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#data_period_start_day": {
+                                        "type": "string"
+                                    },
+                                    "https://purl.org/berg/epw_vocab#data_period_end_day": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
