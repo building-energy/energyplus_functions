@@ -18,10 +18,14 @@ class TestEPlusFunctions(unittest.TestCase):
         result = \
             eplus_functions.run_energyplus(
                 r'C:\Users\cvskf\EnergyPlusV23-2-0',
-                #idf_filepath = 'in.idf',
-                #epw_filepath = 'simple.epw'
+                input_filepath = r'input\in.json',
+                epw_filepath = r'input\in.epw',
+                output_dirpath = 'output',
+                output_file_extensions = ['.err','.sql'],
+                verbose = True
                 )
         
+        print(result)
         #print(csvw_metadata_dict)
         #print(csvw_csv_string[:1000])
 

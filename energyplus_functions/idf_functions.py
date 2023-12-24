@@ -84,7 +84,7 @@ def convert_idf_to_json(
     """
     
     if verbose:
-        print('--- def convert_idf_to_epJSON() ---')
+        print('--- def convert_idf_to_json() ---')
     
     exe_path = f'{energyplus_installation_dirpath}\\ConvertInputFormat'
         # The path to run the ConvertInputFormat.exe program.
@@ -93,7 +93,7 @@ def convert_idf_to_json(
         # Sets up a temporary directory for the intial output file.
         
         if verbose: 
-            print(' - created temporary directory', temp_dirpath)
+            print('- created temporary directory', temp_dirpath)
     
         command = [
             exe_path,
